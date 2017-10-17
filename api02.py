@@ -75,14 +75,30 @@ def locations():
 
 @app.route('/conThings', methods=['POST'])
 def thingsTable():
-    loca_id = request.form['location']
-    status = request.form['status']
     things = Things ()
     location = things.search_locations ()
 
-    thingsData = things.search_things_by_location (loca_id)
+    loca_id = request.form['location']
+    print(loca_id)
+    status = request.form['status']
+    print(status)
+    if loca_id == "0" and status == "1":
+        thingsdata = things.search_all_things_actives()
+    elif loca_id == "0" and status == "2":
+        thingsdata = things.search_all_things_inactives()
+    elif loca_id != "0" and status == "0":
+        thingsdata = things.search_things_by_location(loca_id)
+    elif loca_id != "0" and status == "1":
+        thingsdata = things.search_things_actives_by_location(loca_id)
+    elif loca_id != "0" and status == "2":
+        thingsdata = things.search_things_inactives_by_location(loca_id)
+    elif loca_id == "0" and status == "0":
+        msg = "Please select a Location or Status for consultation. Or, if you prefer, select both."
+        return render_template ('/things.html', location=location, message=msg)
 
-    return render_template('/things.html', thingsData=thingsData, location=location)
+    # thingsData = things.search_things_by_location (loca_id)
+
+    return render_template('/things.html', thingsdata=thingsdata, location=location)
 
 @app.route('/adduser', methods=['POST'])
 def adduser():
