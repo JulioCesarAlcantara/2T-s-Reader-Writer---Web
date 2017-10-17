@@ -1,4 +1,6 @@
 # import os
+from builtins import print
+
 from pip.utils import encoding
 #encoding: utf-8
 from flask import jsonify, request, Flask, render_template, url_for
@@ -79,9 +81,8 @@ def thingsTable():
     location = things.search_locations ()
 
     loca_id = request.form['location']
-    print(loca_id)
     status = request.form['status']
-    print(status)
+
     if loca_id == "0" and status == "1":
         thingsdata = things.search_all_things_actives()
     elif loca_id == "0" and status == "2":
@@ -99,6 +100,62 @@ def thingsTable():
     # thingsData = things.search_things_by_location (loca_id)
 
     return render_template('/things.html', thingsdata=thingsdata, location=location)
+
+@app.route('/reader', methods=['POST'])
+def listLocationReader():
+    things = Things ()
+    location = things.search_locations ()
+
+    return render_template ('/reader.html', locations=location)
+
+@app.route('/writer', methods=['POST'])
+def listLocationWriter():
+    things = Things ()
+    location = things.search_locations ()
+
+    return render_template ('/writer.html', locations=location)
+
+@app.route('/readerLoc', methods=['POST'])
+def thingsTableReader():
+    things = Things ()
+    location = things.search_locations ()
+
+    loca_id = request.form['location1']
+
+    if loca_id != "0":
+        #chama metodo de leitura
+        print("Inserir função de leitura")
+        txt = "Waiting for Reading ..."
+    else:
+        msg = "Please, Select a Location to Read."
+        return render_template ('/reader.html', locations=location, message=msg)
+
+
+    return render_template('/reader.html', locations=location, texto=txt)
+
+@app.route('/writeCon', methods=['POST'])
+def thingsTableWriter():
+    things = Things ()
+    location = things.search_locations ()
+
+    code = request.form['code']
+    loca_id = request.form['location2']
+    print("----- CODE -----")
+    print(code)
+
+    print("----- ID -----")
+    print(loca_id)
+
+    if loca_id != "0" and code == "":
+        dados = things.search_things_inactives_by_location(loca_id)
+        # txt = "Bring the Label Closer to the Writer"
+    elif loca_id =="0" and code != "":
+        dados = things.search_things_by_num1(code)
+    else:
+        msg = "Please, Enter a Code or Location to Writer."
+        return render_template ('/writer.html', locations=location, message=msg)
+
+    return render_template('/writer.html', locations=location, dados=dados)
 
 @app.route('/adduser', methods=['POST'])
 def adduser():
@@ -204,6 +261,10 @@ def voltar():
 @app.route('/things', methods=['POST'])
 def things():
     return render_template('/things.html')
+
+@app.route('/reader', methods=['POST'])
+def reader():
+    return render_template('/reader.html')
 
 
 @app.route('/addthing', methods=['POST'])
