@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+    <title>Tracking Things Server</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/css.css') }}">
+</head>
+<body>
+<h1>
+    <center>2Ts - Server <p>User Manager</p></center>
+</h1>
+
+<fieldset>
+    <legend>Consultar</legend>
+
+    <form action="findUser" method="post">
+        <label>Usuários: </label>
+        <select name="id">
+            {%for user in users%}
+            <option value="{{user.id}}">{{user.name}}</option>
+            {%endfor%}
+        </select>
+        <button type="submit">Consultar</button>
+    </form>
+</fieldset>
+
+<fieldset>
+    <legend>Inserir</legend>
+    {% if user1 is defined %}
+    <form method="POST" action="editUser">
+        {% else %}
+        <form method="POST" action="adduser">
+            {% endif %}
+            <label>*Nome: </label>
+            {% if user1 is defined %}
+            <input required type="text" name="name" value="{{user1.name}}">
+            {% else %}
+            <input required type="text" name="name">
+            {% endif %}
+
+
+            <label>*Email: </label>
+            {% if user1 is defined %}
+            <input required type="text" name="email" value="{{user1.email}}">
+            {% else %}
+            <input required type="text" name="email">
+            {% endif %}
+
+            <label>*Senha: </label>
+            <input type="password" name="password">
+
+            <label>*Permissão: </label>
+            {% if user1 is defined %}
+            <input type="number" name="permission" value="{{user1.permission}}">
+            {% else %}
+            <input type="number" name="permission">
+            {% endif %}
+
+
+            <p>
+                {% if user1 is defined %}
+                <input type="hidden" value="{{user1.id}}" name="id1">
+                <button type="submit">Update</button>
+                {% else %}
+                <button type="submit">Save</button>
+                {% endif %}
+            </p>
+            {% if user1 is defined %}
+        </form>
+        {% else %}
+    </form>
+    {% endif %}
+</fieldset>
+
+<form action="voltar" method="post">
+    <p>
+        <button type="submit">Voltar</button>
+    </p>
+</form>
+
+
+</body>
+</html>

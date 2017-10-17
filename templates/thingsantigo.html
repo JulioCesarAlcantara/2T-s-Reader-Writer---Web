@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/sidenav.css')}}">
+
+    <title>Tracking Things Server</title>
+</head>
+<body>
+<h1>
+    <center>2Ts - Server <p>Things Manager</p></center>
+</h1>
+
+<fieldset>
+    <legend>Consultar</legend>
+    <form action="findThing" method="post">
+        <label>Número do Patrimônio:</label>
+        <input type="text" name="numeroPat">
+        <button type="submit">Consultar</button>
+    </form>
+</fieldset>
+<fieldset>
+    <legend>Inserir</legend>
+    {% if thing is defined %}
+    <form method="POST" action="editThing">
+        {% else %}
+        <form method="POST" action="addthing">
+            {% endif %}
+            <label>*Descricao: </label>
+            {% if thing is defined %}
+            <textarea rows="5" required type="text" name="descricao">{{thing.description}}</textarea>
+            {% else %}
+            <textarea rows="5" required type="text" name="descricao"></textarea>
+            {% endif %}
+
+            <label>*Número do Patrimônio 1: </label>
+            {% if thing is defined %}
+            <input required type="text" name="num1" value="{{thing.nr_things1}}">
+            {% else %}
+            <input required type="text" name="num1">
+            {% endif %}
+
+
+            <label>Número do Patrimônio 2: </label>
+            {% if thing is defined %}
+            <input type="text" name="num2" value="{{thing.nr_things2}}">
+            {% else %}
+            <input type="text" name="num2">
+            {% endif %}
+
+            <label>*Preço: </label>
+            {% if thing is defined %}
+            <input required type="text" name="preco" value="{{thing.value}}">
+            {% else %}
+            <input required type="text" name="preco">
+            {% endif %}
+
+
+            <label>*Situação: </label>
+            {% if thing is defined %}
+            <input required type="text" name="situacao" value="{{thing.situation}}">
+            {% else %}
+            <input required type="text" name="situacao">
+            {% endif %}
+
+            <label>*Estado: </label>
+            {% if thing is defined %}
+            <input required type="text" name="estado" value="{{thing.state}}">
+            {% else %}
+            <input required type="text" name="estado">
+            {% endif %}
+
+
+            <label>*Observação: </label>
+            {% if thing is defined %}
+            <textarea rows="5" required type="text" name="observacao">{{thing.note}}</textarea>
+            {% else %}
+            <textarea rows="5" required type="text" name="observacao"></textarea>
+            {% endif %}
+
+            <p>
+                {% if thing is defined %}
+                <input type="hidden" value="{{thing.code_things}}" name="id">
+                <button type="submit">Update</button>
+                {% else %}
+                <button type="submit">Save</button>
+                {% endif %}
+            </p>
+            {% if thing is defined %}
+        </form>
+        {% else %}
+    </form>
+    {% endif %}
+</fieldset>
+
+<form action="voltar" method="post">
+    <p>
+        <button type="submit">Voltar</button>
+    </p>
+</form>
+</body>
+</html>
