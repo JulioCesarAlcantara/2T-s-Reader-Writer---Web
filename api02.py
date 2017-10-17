@@ -1,7 +1,10 @@
 # import os
+from pip.utils import encoding
+#encoding: utf-8
 from flask import jsonify, request, Flask, render_template, url_for
 import json
 from SynchronizationManager.ThingsSynchronization import ThingsSynchronization
+from ThingsManager.LocationModel import LocationModel
 from ThingsManager.Things import Things
 from ThingsManager.ThingsXLocation import ThingsXLocation
 from UserManager.User import User
@@ -15,10 +18,10 @@ def para_dict(obj):
     if hasattr(obj, '__dict__'):
         obj = obj.__dict__
 
-    # Se for um dict, lê chaves e valores; converte valores
+    # Se for um dict, le chaves e valores; converte valores
     if isinstance(obj, dict):
         return {k: para_dict(v) for k, v in obj.items()}
-    # Se for uma lista ou tupla, lê elementos; também converte
+    # Se for uma lista ou tupla, le elementos; também converte
     elif isinstance(obj, list) or isinstance(obj, tuple):
         return [para_dict(e) for e in obj]
     # Se for qualquer outra coisa, usa sem conversão
@@ -62,6 +65,13 @@ def users():
     users = user.search_all_users()
 
     return render_template('/users.html', users=users)
+
+@app.route('/things', methods=['POST'])
+def locations():
+    things = Things ()
+    location = things.search_locations ()
+
+    return render_template('/things.html', location=location)
 
 
 @app.route('/adduser', methods=['POST'])
@@ -457,4 +467,4 @@ def search_all_things_actives(token):
 #     port = int(os.environ.get("PORT", 5000))
 #     app.run(host='0.0.0.0', port=port)
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=5000)

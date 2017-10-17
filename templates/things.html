@@ -52,8 +52,9 @@
                         <div class="select selectpicker">
                           <select autofocus class="selectpicker form-control account-wall">
                             <option value="">Locations ...</option>
-                            <option>Ketchup</option>
-                            <option>Relish</option>
+                            {%for loc in location%}
+                            <option value="{{loc.loca_id}}">{{loc.loca_room}}</option>
+                            {%endfor%}
                           </select>
                         </div>
                     </div>
