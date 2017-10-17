@@ -73,6 +73,16 @@ def locations():
 
     return render_template('/things.html', location=location)
 
+@app.route('/conThings', methods=['POST'])
+def thingsTable():
+    loca_id = request.form['location']
+    status = request.form['status']
+    things = Things ()
+    location = things.search_locations ()
+
+    thingsData = things.search_things_by_location (loca_id)
+
+    return render_template('/things.html', thingsData=thingsData, location=location)
 
 @app.route('/adduser', methods=['POST'])
 def adduser():
