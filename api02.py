@@ -3,7 +3,7 @@ from builtins import print
 
 from pip.utils import encoding
 #encoding: utf-8
-from flask import jsonify, request, Flask, render_template, url_for
+from flask import jsonify, request, Flask, render_template, url_for, session, g
 import json
 from SynchronizationManager.ThingsSynchronization import ThingsSynchronization
 from ThingsManager.LocationModel import LocationModel
@@ -13,7 +13,7 @@ from UserManager.User import User
 from werkzeug.utils import redirect
 import string
 import random
-
+import os
 
 def para_dict(obj):
     # Se for um objeto, transforma num dict
@@ -32,7 +32,7 @@ def para_dict(obj):
 
 
 app = Flask(__name__)
-
+app.secret_key = os.urandom(24)
 
 @app.route('/')
 def index():
@@ -50,6 +50,8 @@ def post_login():
         if response == False:
             return render_template('/login.html', message="You have entered an invalid username or password")
         else:
+            session.pop('user', None)
+            session['user']=request.form['email']
             return redirect(url_for('inicial'))
     except Exception as e:
         print(e)
@@ -58,8 +60,27 @@ def post_login():
 
 @app.route('/inicial')
 def inicial():
-    return render_template('/inicial.html')
+    if g.user:
+        return render_template('/inicial.html')
 
+    return redirect(url_for('index'))
+
+@app.before_request
+def beforerequest():
+    g.user = None
+    if 'user' in session:
+        g.user = session['user']
+
+@app.route('/getsession')
+def getsession():
+    if 'user' in session:
+        return session['user']
+    return 'Not logged in!'
+
+@app.route('/dropsession')
+def dropsession():
+    session.pop('user', None)
+    return 'Dropped!'
 
 @app.route('/users', methods=['POST'])
 def users():
