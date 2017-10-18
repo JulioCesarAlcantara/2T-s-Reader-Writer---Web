@@ -106,14 +106,39 @@ def thingsTable():
 
     if loca_id == "0" and status == "1":
         thingsdata = things.search_all_things_actives()
+
+        if thingsdata == False:
+            msg = "Object not found."
+            return render_template ('/things.html', location=location, message=msg)
+
     elif loca_id == "0" and status == "2":
         thingsdata = things.search_all_things_inactives()
+
+        if thingsdata == False:
+            msg = "Object not found."
+            return render_template ('/things.html', location=location, message=msg)
+
     elif loca_id != "0" and status == "0":
         thingsdata = things.search_things_by_location(loca_id)
+
+        if thingsdata == False:
+            msg = "Object not found."
+            return render_template ('/things.html', location=location, message=msg)
+
     elif loca_id != "0" and status == "1":
         thingsdata = things.search_things_actives_by_location(loca_id)
+
+        if thingsdata == False:
+            msg = "Object not found."
+            return render_template ('/things.html', location=location, message=msg)
+
     elif loca_id != "0" and status == "2":
         thingsdata = things.search_things_inactives_by_location(loca_id)
+
+        if thingsdata == False:
+            msg = "Object not found."
+            return render_template ('/things.html', location=location, message=msg)
+
     elif loca_id == "0" and status == "0":
         msg = "Please select a Location or Status for consultation. Or, if you prefer, select both."
         return render_template ('/things.html', location=location, message=msg)
@@ -121,6 +146,7 @@ def thingsTable():
     # thingsData = things.search_things_by_location (loca_id)
 
     return render_template('/things.html', thingsdata=thingsdata, location=location)
+
 
 @app.route('/reader', methods=['POST'])
 def listLocationReader():
@@ -135,6 +161,10 @@ def listLocationWriter():
     location = things.search_locations ()
 
     return render_template ('/writer.html', locations=location)
+
+@app.route('/synchronize', methods=['POST'])
+def synchronize():
+    return render_template ('/synchronize.html')
 
 @app.route('/readerLoc', methods=['POST'])
 def thingsTableReader():
@@ -159,24 +189,30 @@ def thingsTableWriter():
     things = Things ()
     location = things.search_locations ()
 
-    code = request.form['code']
-    loca_id = request.form['location2']
-    print("----- CODE -----")
+    code = request.form['code1']
+    print("---- Codigo -------")
     print(code)
 
-    print("----- ID -----")
-    print(loca_id)
+    loca_id = request.form['location2']
 
     if loca_id != "0" and code == "":
         dados = things.search_things_inactives_by_location(loca_id)
-        # txt = "Bring the Label Closer to the Writer"
-    elif loca_id =="0" and code != "":
+
+        if dados == False:
+            msg = "Objects not found."
+            return render_template ('/writer.html', locations=location, message=msg)
+
+    elif loca_id == "0" and code != "":
         dados = things.search_things_by_num1(code)
+
+        if dados == False:
+            msg = "Objects not found."
+            return render_template ('/writer.html', locations=location, message=msg)
     else:
         msg = "Please, Enter a Code or Location to Writer."
         return render_template ('/writer.html', locations=location, message=msg)
 
-    return render_template('/writer.html', locations=location, dados=dados)
+    return render_template('/writer.html', locations=location, dado=dados)
 
 @app.route('/adduser', methods=['POST'])
 def adduser():

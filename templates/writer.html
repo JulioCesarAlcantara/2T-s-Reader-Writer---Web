@@ -44,9 +44,9 @@
                 <div class="row-fluid">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="select selectpicker ">
-                          <input type="text" class="form-control" name="code">
+                          <input autofocus type="text" class="form-control" name="code1">
                             <br>
-                          <select autofocus  required name="location2" class="selectpicker form-control account-wall">
+                          <select  name="location2" class="selectpicker form-control account-wall">
                             <option value="0">Location ...</option>
                             {%for loc in locations%}
                             <option value="{{loc.loca_id}}">{{loc.loca_room}}</option>
@@ -76,17 +76,17 @@
                     <div class="col-md-12">
                         <div class="table-responsive">
                           <table id="mytable" class="table table-bordred table-striped">
-                               {%if dados is defined%}
+                               {%if dado is defined%}
                                <thead align="center">
-                                   <th><center><input type="checkbox" id="checkall" /></center></th>
+                                   <th><center>Selection</center></th>
                                    <th><center>Code</center></th>
                                    <th><center>Name</center></th>
                                    <th><center>Location</center></th>
                                </thead>
                                <tbody>
-                                    {%for things in dados%}
+                                    {%for things in dado%}
                                     <tr align="center">
-                                        <td><input type="checkbox" class="checkthis" value="{{things.nr_things1}}" /></td>
+                                        <td><input name="radioSelected" type="radio" class="checkthis" value="{{things.nr_things1}}" /></td>
                                         <td>{{things.nr_things1}}</td>
                                         <td>{{things.description}}</td>
                                         <td>{{things.location.loca_room}}</td>
@@ -104,7 +104,7 @@
                             <a href="/inicial" class="btn-lg btn-success col-md-2 text-center align-left" role="button"><< Back</a>
                         </div>
                         <div class="col col-md-offset-8">
-                            <button type="submit" class="btn btn-lg btn-warning col-md-4 align-right glyphicon glyphicon-ok"> Save</button>
+                            <button type="submit" class="btn btn-lg btn-warning col-md-4 align-right glyphicon glyphicon-ok"> Active</button>
                         </div>
                     </div>
                 </div>
