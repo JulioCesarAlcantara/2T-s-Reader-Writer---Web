@@ -36,6 +36,8 @@ app.secret_key = os.urandom(24)
 
 @app.route('/')
 def index():
+    if 'user' in session:
+        return render_template('/inicial.html', message=session['name'])
     return render_template('/login.html')
 
 
@@ -51,8 +53,12 @@ def post_login():
             return render_template('/login.html', message="You have entered an invalid username or password")
         else:
             session.pop('user', None)
+            session['token'] = response.token
+            session['id'] = response.id
+            session['name'] = response.name
             session['user']=request.form['email']
-            return redirect(url_for('inicial'))
+            session['permission']=response.permission
+            return render_template('/inicial.html', message=session['name'])
     except Exception as e:
         print(e)
         return "Erro no servidor. Contate o Analista"
@@ -61,7 +67,7 @@ def post_login():
 @app.route('/inicial')
 def inicial():
     if g.user:
-        return render_template('/inicial.html')
+        return render_template('/inicial.html', message=session['name'])
 
     return redirect(url_for('index'))
 
@@ -74,7 +80,7 @@ def beforerequest():
 @app.route('/getsession')
 def getsession():
     if 'user' in session:
-        return session['user']
+        return session['name']
     return 'Not logged in!'
 
 @app.route('/dropsession')
@@ -312,7 +318,7 @@ def editThing():
 
 @app.route('/voltar', methods=['POST'])
 def voltar():
-    return render_template('/inicial.html')
+    return render_template('/inicial.html', message=session['name'])
 
 
 @app.route('/things', methods=['POST'])
