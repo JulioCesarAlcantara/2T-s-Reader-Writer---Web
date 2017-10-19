@@ -1,7 +1,7 @@
 # import os
 from builtins import print
 
-from pip.utils import encoding
+#from pip.utils import encoding
 #encoding: utf-8
 from flask import jsonify, request, Flask, render_template, url_for, session, g
 import json
