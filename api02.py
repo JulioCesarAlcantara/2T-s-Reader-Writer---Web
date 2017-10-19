@@ -348,6 +348,7 @@ def addthing():
 
 @app.route('/quit', methods=['POST'])
 def quit():
+    session.pop('user', None)
     return render_template('/login.html')
 
 
