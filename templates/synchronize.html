@@ -63,46 +63,16 @@
                </thead>
 
                <tbody>
+               {%for thing in things%}
                     <tr>
                         <td><input type="checkbox" class="checkthis" value=""/></td>
-                        <td>Mohsin</td>
-                        <td>Irshad</td>
-                        <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
+                        <td>{{thing['code']}}</td>
+                        <td>{{thing['name']}}</td>
+                        <td>{{thing['location']}}</td>
 
                     </tr>
+               {%endfor%}
 
-                    <tr>
-                        <td><input type="checkbox" class="checkthis" /></td>
-                        <td>Mohsin</td>
-                        <td>Irshad</td>
-                        <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="checkthis" /></td>
-                        <td>Mohsin</td>
-                        <td>Irshad</td>
-                        <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="checkthis" /></td>
-                        <td>Mohsin</td>
-                        <td>Irshad</td>
-                        <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-
-                    </tr>
-
-
-                    <tr>
-                        <td><input type="checkbox" class="checkthis" /></td>
-                        <td>Mohsin</td>
-                        <td>Irshad</td>
-                        <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-
-                    </tr>
                 </tbody>
             </table>
      </div>

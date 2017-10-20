@@ -170,7 +170,16 @@ def listLocationWriter():
 
 @app.route('/synchronize', methods=['POST'])
 def synchronize():
-    return render_template ('/synchronize.html')
+    with open('sync.json') as json_data:
+        data = json.load(json_data)
+        list = []
+        for thing in data['Things']:
+            list.append(thing)
+
+        for t in list:
+            print(t['name'])
+
+    return render_template ('/synchronize.html', things=list)
 
 @app.route('/readerLoc', methods=['POST'])
 def thingsTableReader():
