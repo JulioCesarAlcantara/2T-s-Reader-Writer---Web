@@ -1,14 +1,14 @@
 import pymysql
 
 class Connection(object):
-    __server = 'sql10.freemysqlhosting.net'
-    # __server = 'localhost'
-    __user = 'sql10190757'
-    # __user = 'root'
-    __password = 'bqwh8pTxPg'
-    # __password = 'f@bric@'
-    __database = 'sql10190757'
-    # __database = 'patrimonioIFG'
+    #__server = 'sql10.freemysqlhosting.net'
+    __server = 'localhost'
+    #__user = 'sql10190757'
+    __user = 'root'
+    # __password = 'bqwh8pTxPg'
+    __password = 'f@bric@'
+    # __database = 'sql10190757'
+    __database = 'patrimonioIFG'
 
     def __init__(self):
         self.db = pymysql.connect(host = Connection.__server, port = 3306, user = Connection.__user, passwd = Connection.__password, db = Connection.__database)
