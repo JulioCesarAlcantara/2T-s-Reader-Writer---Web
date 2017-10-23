@@ -13,7 +13,7 @@ from UserManager.User import User
 from werkzeug.utils import redirect
 import string
 import random
-import os
+# import os
 
 def para_dict(obj):
     # Se for um objeto, transforma num dict
@@ -32,7 +32,7 @@ def para_dict(obj):
 
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+# app.secret_key = os.urandom(24)
 
 @app.route('/')
 def index():
