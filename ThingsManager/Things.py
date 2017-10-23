@@ -100,15 +100,15 @@ class Things(ThingsModel):
                                       " INNER JOIN localizacao AS loca_1 ON loca_1.loca_id = pabe_loca_id"
                                       " LEFT JOIN localizacao AS loca_2 ON loca_2.loca_id = pblo_loca_id"
                                       " WHERE pabe_etiqueta_ativa = 0 AND pabe_loca_id ='" + str(loca_id) + "'")
-            print("SELECT pabe_id, pabe_num_patr1, pabe_num_patr2, pabe_descricao,"
-                                      " pabe_situacao, pabe_valor, pabe_dt_cadastro, pabe_estado,"
-                                      " loca_1.loca_id AS pabe_location_id, loca_1.loca_sala AS pabe_location_sala,"
-                                      " pabe_observacao, pabe_etiqueta_ativa, loca_2.loca_id AS pblo_location_id,"
-                                      " loca_2.loca_sala AS pblo_location_sala FROM patr_bens "
-                                      " LEFT JOIN patr_bens_x_localizacao ON pabe_id = pblo_pabe_id"
-                                      " INNER JOIN localizacao AS loca_1 ON loca_1.loca_id = pabe_loca_id"
-                                      " LEFT JOIN localizacao AS loca_2 ON loca_2.loca_id = pblo_loca_id"
-                                      " WHERE pabe_etiqueta_ativa = 0 AND pabe_loca_id ='" + str(loca_id) + "'")
+            # print("SELECT pabe_id, pabe_num_patr1, pabe_num_patr2, pabe_descricao,"
+            #                           " pabe_situacao, pabe_valor, pabe_dt_cadastro, pabe_estado,"
+            #                           " loca_1.loca_id AS pabe_location_id, loca_1.loca_sala AS pabe_location_sala,"
+            #                           " pabe_observacao, pabe_etiqueta_ativa, loca_2.loca_id AS pblo_location_id,"
+            #                           " loca_2.loca_sala AS pblo_location_sala FROM patr_bens "
+            #                           " LEFT JOIN patr_bens_x_localizacao ON pabe_id = pblo_pabe_id"
+            #                           " INNER JOIN localizacao AS loca_1 ON loca_1.loca_id = pabe_loca_id"
+            #                           " LEFT JOIN localizacao AS loca_2 ON loca_2.loca_id = pblo_loca_id"
+            #                           " WHERE pabe_etiqueta_ativa = 0 AND pabe_loca_id ='" + str(loca_id) + "'")
             if cursor.rowcount == 0:
                 return False
             listThings = []

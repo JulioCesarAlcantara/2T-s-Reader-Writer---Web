@@ -11,6 +11,7 @@ from ThingsManager.Things import Things
 from ThingsManager.ThingsXLocation import ThingsXLocation
 from UserManager.User import User
 from werkzeug.utils import redirect
+from Classes.write_id import writerTag
 import string
 import random
 import os
@@ -181,6 +182,15 @@ def synchronize():
 
     return render_template ('/synchronize.html', things=list)
 
+@app.route('/writeTag', methods=['POST'])
+def writerInTag():
+
+    codigoThing = request.form['radioSelected']
+
+    write = writerTag(str(codigoThing))
+
+    return render_template ('/writer.html')
+
 @app.route('/readerLoc', methods=['POST'])
 def thingsTableReader():
     things = Things ()
@@ -205,9 +215,6 @@ def thingsTableWriter():
     location = things.search_locations ()
 
     code = request.form['code1']
-    print("---- Codigo -------")
-    print(code)
-
     loca_id = request.form['location2']
 
     if loca_id != "0" and code == "":
