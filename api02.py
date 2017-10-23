@@ -1,5 +1,5 @@
 # import os
-from builtins import print
+# from builtins import print
 
 from pip.utils import encoding
 #encoding: utf-8
@@ -187,7 +187,7 @@ def writerInTag():
 
     codigoThing = request.form['radioSelected']
 
-    write = writerTag(str(codigoThing))
+    writerTag(str(codigoThing))
 
     return render_template ('/writer.html')
 
