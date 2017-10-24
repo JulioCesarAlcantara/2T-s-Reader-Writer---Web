@@ -77,21 +77,21 @@
                         <div class="table-responsive">
                           <table id="mytable" class="table table-bordred table-striped">
                                {%if dado is defined%}
-                               <thead align="center">
-                                   <th><center>Selection</center></th>
-                                   <th><center>Code</center></th>
-                                   <th><center>Name</center></th>
-                                   <th><center>Location</center></th>
-                               </thead>
-                               <tbody>
-                                    {%for things in dado%}
-                                    <tr align="center">
-                                        <td><input name="radioSelected" type="radio" class="checkthis" value="{{things.nr_things1}}" /></td>
-                                        <td>{{things.nr_things1}}</td>
-                                        <td>{{things.description}}</td>
-                                        <td>{{things.location.loca_room}}</td>
-                                    </tr>
-                                    {%endfor%}
+                                   <thead align="center">
+                                       <th><center>Selection</center></th>
+                                       <th><center>Code</center></th>
+                                       <th><center>Name</center></th>
+                                       <th><center>Location</center></th>
+                                   </thead>
+                                   <tbody>
+                                        {%for things in dado%}
+                                        <tr align="center">
+                                            <td><input name="radioSelected" type="radio" class="checkthis" value="{{things.nr_things1}}" /></td>
+                                            <td>{{things.nr_things1}}</td>
+                                            <td>{{things.description}}</td>
+                                            <td>{{things.location.loca_room}}</td>
+                                        </tr>
+                                        {%endfor%}
                                {%endif%}
                                 </tbody>
                           </table>
@@ -101,10 +101,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col col-md-offset">
-                            <a href="/inicial" class="btn-lg btn-success col-md-2 text-center align-left" role="button"><< Back</a>
+                            <a href="/inicial" class="btn-lg btn-danger col-md-2 text-center align-left glyphicon glyphicon-arrow-left" role="button"> Back</a>
                         </div>
                         <div class="col col-md-offset-8">
-                            <button type="submit" class="btn btn-lg btn-warning col-md-4 align-right glyphicon glyphicon-ok"> Active</button>
+                            <button type="submit" class="btn btn-lg btn-success col-md-4 align-right glyphicon glyphicon-ok"> Active</button>
                         </div>
                     </div>
                 </div>

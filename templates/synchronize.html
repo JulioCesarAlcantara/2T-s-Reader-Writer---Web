@@ -11,6 +11,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 
+    <script src="{{url_for('static',filename='styles/synchronize.js')}}" type="text/javascript"></script>
+
 
     <title>2Ts Reader/Writer</title>
 </head>
@@ -80,10 +82,10 @@
       <div class="container">
             <div class="row">
                 <div class="col col-md-offset">
-                    <a href="/inicial" class="btn-lg btn-success col-md-2 text-center align-left" role="button"><< Back</a>
+                    <a href="/inicial" class="btn-lg btn-danger col-md-2 text-center align-left glyphicon glyphicon-arrow-left" role="button"> Back</a>
                 </div>
                 <div class="col col-md-offset-8">
-                    <button type="submit" class="btn btn-lg btn-warning align-right glyphicon glyphicon-cloud-upload">Synchronize</button>
+                    <button type="submit" class="btn btn-lg btn-success align-right glyphicon glyphicon-cloud-upload">Synchronize</button>
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@ from ThingsManager.Things import Things
 from ThingsManager.ThingsXLocation import ThingsXLocation
 from UserManager.User import User
 from werkzeug.utils import redirect
-from Classes.write_id import writerTag
+# from Classes.write_id import writerTag
 import string
 import random
 import os
@@ -182,14 +182,14 @@ def synchronize():
 
     return render_template ('/synchronize.html', things=list)
 
-@app.route('/writeTag', methods=['POST'])
-def writerInTag():
-
-    codigoThing = request.form['radioSelected']
-
-    writerTag(str(codigoThing))
-
-    return render_template ('/writer.html')
+# @app.route('/writeTag', methods=['POST'])
+# def writerInTag():
+#
+#     codigoThing = request.form['radioSelected']
+#
+#     writerTag(str(codigoThing))
+#
+#     return render_template ('/writer.html')
 
 @app.route('/readerLoc', methods=['POST'])
 def thingsTableReader():
@@ -225,13 +225,14 @@ def thingsTableWriter():
             return render_template ('/writer.html', locations=location, message=msg)
 
     elif loca_id == "0" and code != "":
-        dados = things.search_things_by_num1(code)
+        dados = []
+        dados.append(things.search_things_by_num1(code))
 
-        if dados == False:
+        if dados[0] == False:
             msg = "Objects not found."
             return render_template ('/writer.html', locations=location, message=msg)
     else:
-        msg = "Please, Enter a Code or Location to Writer."
+        msg = "Please, Enter a Code or Location to Write."
         return render_template ('/writer.html', locations=location, message=msg)
 
     return render_template('/writer.html', locations=location, dado=dados)
