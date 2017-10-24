@@ -9,7 +9,7 @@ class writerTag():
 
     def __init__(self, codThings):
         continue_reading = True
-        texto = codThings
+        self.texto = codThings
         self.end_read()
         self.methodWriter()
 
@@ -71,7 +71,7 @@ class writerTag():
                         data1 = []
                        # data2 = []
 
-                        for x in range(0, 16-int(len(str(code)))):
+                        for x in range(0, 16-int(len(self.texto)):
                             data1.append(0x00)
 
 
