@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 
-from RPi._GPIO import *
+from RPi._GPIO import GPIO
 import MFRC522
 import signal
 
