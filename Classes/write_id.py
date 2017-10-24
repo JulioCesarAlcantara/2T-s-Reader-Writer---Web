@@ -71,7 +71,7 @@ class writerTag():
                         data1 = []
                        # data2 = []
 
-                        for x in range(0, 16-int(len(self.texto)):
+                        for x in range(0, 16-int(len(self.texto))):
                             data1.append(0x00)
 
 
